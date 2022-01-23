@@ -21,9 +21,9 @@ class PasswordListBloc extends Bloc<PasswordListEvent, PasswordListState> {
       } on CacheFailure {
         yield PasswordListErrorState(cacheFailureMesssage);
       }
-    } else if (event is SavePasswordEvent) {
+    } else if (event is SavePasswordsEvent) {
       try {
-        await passwordRepository.savePassword(event.password);
+        await passwordRepository.savePasswords(event.passwords);
       } on CacheFailure {
         yield PasswordListErrorState(cacheFailureMesssage);
       }

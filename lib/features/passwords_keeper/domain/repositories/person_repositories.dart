@@ -2,6 +2,6 @@ import 'package:passwords_keeper/features/passwords_keeper/domain/entities/passw
 
 abstract class PasswordRepository {
   Future<List<PasswordListItemEntity>> getAllPassword();
-  Future<void> savePassword(PasswordListItemEntity password);
+  Future<void> savePasswords(List<PasswordListItemEntity> passwords);
   Future<List<PasswordListItemEntity>> searchPassword(String query);
 }

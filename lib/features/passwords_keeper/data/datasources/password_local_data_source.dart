@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class PasswordLocalDataSource {
   Future<List<PasswordListItemModel>> getPasswordsFromCache();
-  Future<String> passwordToCache(PasswordListItemModel password);
+  Future<List<String>> passwordToCache(List<PasswordListItemModel> passwords);
 }
 
 const String cashcedPasswordListKey = 'CASHED_PASSWORD_LIST_KEY';
@@ -28,10 +28,11 @@ class PasswordLocalDataSourceImpl implements PasswordLocalDataSource {
   }
 
   @override
-  Future<String> passwordToCache(PasswordListItemModel password) {
-    final String jsonPassword = password.toJson();
+  Future<List<String>> passwordToCache(List<PasswordListItemModel> passwords) {
+    final List<String> jsonPasswordList =
+        passwords.map((password) => password.toJson()).toList();
 
-    sharedPreferences.setString(cashcedPasswordListKey, jsonPassword);
-    return Future.value(jsonPassword);
+    sharedPreferences.setStringList(cashcedPasswordListKey, jsonPasswordList);
+    return Future.value(jsonPasswordList);
   }
 }

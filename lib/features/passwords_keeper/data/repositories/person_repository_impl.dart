@@ -21,9 +21,10 @@ class PasswordRepositoryImpl implements PasswordRepository {
   }
 
   @override
-  Future<void> savePassword(PasswordListItemEntity password) async {
+  Future<void> savePasswords(List<PasswordListItemEntity> passwords) async {
     try {
-      await localDataSource.passwordToCache(password as PasswordListItemModel);
+      await localDataSource
+          .passwordToCache(passwords as List<PasswordListItemModel>);
     } on CacheException {
       throw CacheFailure();
     }
